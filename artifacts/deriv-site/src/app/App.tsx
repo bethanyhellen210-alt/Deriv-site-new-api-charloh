@@ -12,8 +12,6 @@ import { isPreviewMode, PREVIEW_BASE_PATH } from '@/utils/is-preview-mode';
 import { localize, TranslationProvider } from '@deriv-com/translations';
 import CoreStoreProvider from './CoreStoreProvider';
 import i18nInstance from './i18n';
-import SplashLoader from '@/components/splash-loader/splash-loader';
-import SocialPopup from '@/components/social-popup/social-popup';
 import './app-root.scss';
 
 const Layout = lazy(() => import('../components/layout'));
@@ -59,18 +57,6 @@ const router = createBrowserRouter(
 function App() {
     useAccountSwitching();
 
-    const [splashDone, setSplashDone] = React.useState(false);
-    const [showSocial, setShowSocial] = React.useState(false);
-
-    const handleSplashDone = React.useCallback(() => {
-        setSplashDone(true);
-        setShowSocial(true);
-    }, []);
-
-    const handleSocialClose = React.useCallback(() => {
-        setShowSocial(false);
-    }, []);
-
     React.useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         if (!urlParams.has('code')) return;
@@ -109,13 +95,7 @@ function App() {
         handleCallback();
     }, []);
 
-    return (
-        <>
-            {!splashDone && <SplashLoader onDone={handleSplashDone} />}
-            {showSocial && <SocialPopup onClose={handleSocialClose} />}
-            <RouterProvider router={router} />
-        </>
-    );
+    return <RouterProvider router={router} />;
 }
 
 export default App;
