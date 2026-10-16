@@ -7,7 +7,6 @@ import { api_base } from '@/external/bot-skeleton';
 import { useStore } from '@/hooks/useStore';
 import { useDevice } from '@deriv-com/ui';
 import { crypto_currencies_display_order, fiat_currencies_display_order } from '../shared';
-import LandingPage from '../../pages/landing';
 import Footer from './footer';
 import AppHeader from './header';
 import Body from './main-body';
@@ -146,11 +145,6 @@ const Layout = observer(() => {
     const is_logged_in = store?.client?.is_logged_in;
     const is_public_nexus_ai =
         window.location.hash === '#nexus_ai' || window.location.hash === '#alpha_scan_ai';
-
-    // Show landing page for unauthenticated visitors once auth state has settled
-    if (isInitialAuthCheckComplete && !is_logged_in && !isCallbackPage && !is_public_nexus_ai) {
-        return <LandingPage />;
-    }
 
     return (
         <div
