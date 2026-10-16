@@ -51,6 +51,8 @@ export default defineConfig({
       },
     },
     alias: {
+      // Match tsconfig's @/* paths for any source folder not listed below (e.g. @/services).
+      '@': path.resolve(__dirname, './src'),
       // Resolve from wherever the package actually lives so the build works
       // both standalone and inside the monorepo (npm workspaces hoist react to
       // the repo root, so a cwd-relative './node_modules/react' fails in CI).
