@@ -425,7 +425,9 @@ const AppWrapper = observer(() => {
                                     </>
                                 }
                                 id='id-bot-builder'
-                            />
+                            >
+                                <BotBuilder />
+                            </div>
                             <div
                                 label={
                                     <>
