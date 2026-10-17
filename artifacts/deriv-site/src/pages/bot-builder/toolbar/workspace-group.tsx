@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
+import { DBOT_TABS } from '@/constants/bot-contents';
 import { useStore } from '@/hooks/useStore';
 import {
     LabelPairedArrowRotateLeftMdRegularIcon,
@@ -21,7 +22,12 @@ import ToolbarIcon from './toolbar-icon';
 
 const WorkspaceGroup = observer(() => {
     const { dashboard, toolbar, load_modal, save_modal } = useStore();
-    const { setPreviewOnPopup, setChartModalVisibility, setTradingViewModalVisibility } = dashboard;
+    const {
+        setPreviewOnPopup,
+        setChartModalVisibility,
+        setTradingViewModalVisibility,
+        setActiveTab,
+    } = dashboard;
     const { has_redo_stack, has_undo_stack, onResetClick, onSortClick, onUndoClick, onZoomInOutClick } = toolbar;
     const { toggleSaveModal } = save_modal;
     const { toggleLoadModal } = load_modal;
@@ -85,6 +91,35 @@ const WorkspaceGroup = observer(() => {
                         >
                             <LabelPairedObjectsAlignLeftMdRegularIcon />
                         </span>
+                    }
+                />
+                <div className='vertical-divider' />
+                <ToolbarIcon
+                    popover_message={localize('Bulk Trade')}
+                    icon={
+                        <button
+                            type='button'
+                            className='toolbar__icon toolbar__shortcut'
+                            id='db-toolbar__bulk-trade-button'
+                            aria-label={localize('Open Bulk Trade')}
+                            onClick={() => setActiveTab(DBOT_TABS.AI_SIGNALS)}
+                        >
+                            <LabelPairedObjectsAlignLeftMdRegularIcon />
+                        </button>
+                    }
+                />
+                <ToolbarIcon
+                    popover_message={localize('Pro Analysis')}
+                    icon={
+                        <button
+                            type='button'
+                            className='toolbar__icon toolbar__shortcut'
+                            id='db-toolbar__pro-analysis-button'
+                            aria-label={localize('Open Pro Analysis')}
+                            onClick={() => setActiveTab(DBOT_TABS.AI_ANALYSIS)}
+                        >
+                            <LabelPairedChartLineMdRegularIcon />
+                        </button>
                     }
                 />
                 {isDesktop && (
